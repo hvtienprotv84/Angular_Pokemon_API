@@ -1,0 +1,19 @@
+<div *ngIf="pokemonDetails" class="pokemon-details">
+    <img [src]="pokemonDetails.sprites.front_default" alt="{{ pokemonDetails.name }}">
+    <h2>{{ pokemonDetails.name | titlecase }}</h2>
+    <p><strong>Loại:</strong> 
+      <span *ngFor="let type of pokemonDetails.types; let i = index">
+        {{ type.type.name }}<span *ngIf="i < pokemonDetails.types.length - 1">, </span>
+      </span>
+    </p>
+    <ul>
+      <p><strong>Thông Số:</strong></p>
+      <li *ngFor="let stat of pokemonDetails.stats">{{ stat.stat.name }}: {{ stat.base_stat }}</li>
+    </ul>
+    <ul>
+      <p><strong>Kỹ Năng:</strong></p>
+      <li *ngFor="let ability of pokemonDetails.abilities">{{ ability.ability.name }}</li>
+    </ul>
+      <img (click)="onClose()" class="button_close" src="./button_close.png" />
+ </div>
+  

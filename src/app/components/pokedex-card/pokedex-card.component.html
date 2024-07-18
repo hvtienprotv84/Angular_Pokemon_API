@@ -1,0 +1,8 @@
+
+<div *ngIf="pokemonDetails" class="card" (click)="onSelect()">
+    <img [src]="pokemonDetails.sprites.front_default" alt="{{ pokemonDetails.name }}">
+    <div class="card-body">
+      <h5 class="card-title">{{ pokemonDetails.name | titlecase }}</h5>
+    </div>
+  </div>
+  

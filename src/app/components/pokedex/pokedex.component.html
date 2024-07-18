@@ -1,0 +1,37 @@
+
+<!--   Affichage en cartes -->
+<div class="search-container">
+    <input 
+      type="text" 
+      placeholder="Tìm Kiếm Theo Tên Pokémon     Ví dụ: Venusaur" 
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()">
+  </div>
+
+
+<div *ngIf="paginatedPokemonList.length">
+    <h2>Danh Sách Pokémon</h2>
+    <div class="card-container">
+        <app-pokedex-card 
+        *ngFor="let pokemon of paginatedPokemonList" 
+        [pokemonName]="pokemon.name"
+        (selectPokemon)="onSelectPokemon($event)">
+        </app-pokedex-card>
+    </div>
+    <div class="pagination">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">🡨 Trang Trước</button>
+        <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i + 1)">
+          {{ i + 1 }}
+        </button>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Trang Sau 🡪</button>
+      </div>
+      <p class="footer">&copy; Mọi Bản Quyền Thuộc Về Huỳnh Vĩnh Tiến</p>
+</div>
+<div class="loading_search" *ngIf="!filteredPokemonList.length">
+    Đang tải....
+</div>
+<app-pokedex-detail
+ *ngIf="selectedPokemon"
+ [pokemonName]="selectedPokemon"
+ (close)="onCloseDetail()">
+</app-pokedex-detail>
